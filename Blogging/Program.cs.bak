@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity.Migrations;
 using System.Linq;
 
 namespace Blogging
@@ -17,14 +16,8 @@ namespace Blogging
                 Console.Write("Enter a name for a new Blog: ");
                 string name = Console.ReadLine();
 
-                Blog existingBlog = db.Blogs.FirstOrDefault(b => b.Name.Equals(name));
-
-                Blog blog = new Blog 
-                { 
-                    BlogId = existingBlog?.BlogId ?? 0,
-                    Name = name
-                };
-                db.Blogs.AddOrUpdate(blog);
+                Blog blog = new Blog { Name = name };
+                db.Blogs.Add(blog);
                 db.SaveChanges();
 
                 // Display all Blogs from the database
